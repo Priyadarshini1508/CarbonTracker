@@ -9,7 +9,7 @@ import EarthModel from "./EarthModel";
 function Scene() {
   return (
     <Canvas
-      camera={{ position: [0, 0, 4] }}
+      camera={{ position: [2.8,0,4] }}
       style={{
         position: "fixed",
         inset: 0,
@@ -18,7 +18,7 @@ function Scene() {
     >
       <color attach="background" args={["#030712"]} />
 
-      <ambientLight intensity={2} />
+      <ambientLight intensity={1.4}/>
 
       <directionalLight
         intensity={3}
@@ -38,6 +38,15 @@ function Scene() {
         factor={6}
         saturation={0}
         fade
+      />
+      <spotLight
+
+      position={[8,8,8]}
+
+      intensity={2.5}
+
+      color="#7DF9FF"
+
       />
 
       <EarthModel />

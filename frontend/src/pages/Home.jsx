@@ -7,18 +7,32 @@ import Footer from "../components/Footer";
 
 function Home() {
   return (
-    <>
+    <div className="home">
+
       <Earth />
       <FloatingLeaves />
 
       <Navbar />
 
-      <Hero />
+      <section className="hero-section">
+
+        <div className="left">
+
+          <Hero />
+
+        </div>
+
+        <div className="right">
+
+        </div>
+
+      </section>
 
       <Features />
 
       <Footer />
-    </>
+
+    </div>
   );
 }
 
