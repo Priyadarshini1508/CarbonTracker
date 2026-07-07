@@ -30,30 +30,30 @@ public class UserService {
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
-    public ProfileResponse getProfile(Long id) {
+    public ProfileResponse getProfile(User user) {
 
-        User user = userRepository.findById(id)
+        User dbUser = userRepository.findById(user.getId())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         return new ProfileResponse(
-                user.getId(),
-                user.getFullName(),
-                user.getEmail(),
-                user.getPreferredUnit(),
-                user.getGoalVisibility()
+                dbUser.getId(),
+                dbUser.getFullName(),
+                dbUser.getEmail(),
+                dbUser.getPreferredUnit(),
+                dbUser.getGoalVisibility()
         );
     }
-    public ProfileResponse updateProfile(Long id, UpdateProfileRequest request) {
+    public ProfileResponse updateProfile(User user, UpdateProfileRequest request) {
 
-        User user = userRepository.findById(id)
+        User dbuser = userRepository.findById(user.getId())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        user.setFullName(request.getFullName());
-        user.setEmail(request.getEmail());
-        user.setPreferredUnit(request.getPreferredUnit());
-        user.setGoalVisibility(request.getGoalVisibility());
+        dbuser.setFullName(request.getFullName());
+        dbuser.setEmail(request.getEmail());
+        dbuser.setPreferredUnit(request.getPreferredUnit());
+        dbuser.setGoalVisibility(request.getGoalVisibility());
 
-        User updatedUser = userRepository.save(user);
+        User updatedUser = userRepository.save(dbuser);
 
         return new ProfileResponse(
                 updatedUser.getId(),

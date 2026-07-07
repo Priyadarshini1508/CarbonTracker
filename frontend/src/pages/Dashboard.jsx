@@ -298,14 +298,13 @@ useEffect(() => {
           Number(activityForm.hours) ||
           Number(activityForm.itemsCount) ||
           1,
-        emission: computedVal,
         unit:
           activityForm.type === "Transport"
             ? "km"
             : activityForm.type === "Electricity"
-            ? "hours"
+            ? "kWh"
             : activityForm.type === "Shopping"
-            ? "items"
+            ? "item"
             : "meal",
         subType:
           activityForm.transportMode ||

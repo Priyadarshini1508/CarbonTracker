@@ -5,6 +5,9 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 @Data
 @NoArgsConstructor
@@ -25,20 +28,27 @@ public class Activity {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
+    @NotNull(message = "Activity type is required")
     private ActivityType activityType;
 
     @Column(nullable = false)
+    @NotNull(message = "Quantity is required")
+    @Positive(message = "Quantity must be greater than 0")
     private Double quantity;
 
     @Column(nullable = false)
     private Double emission;
 
     @Column(nullable = false)
+    @NotBlank(message = "Unit is required")
     private String unit;
 
     @Column(nullable = false)
     private LocalDateTime createdAt;
 
     @Column(nullable = false)
+    @NotBlank(message = "Sub type is required")
     private String subType;
+
+
 }

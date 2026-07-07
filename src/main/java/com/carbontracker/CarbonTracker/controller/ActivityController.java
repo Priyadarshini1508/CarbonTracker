@@ -6,6 +6,7 @@ import com.carbontracker.CarbonTracker.service.ActivityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class ActivityController {
 
     @PostMapping
     public Activity saveActivity(
-            @RequestBody Activity activity,
+          @Valid @RequestBody Activity activity,
             @AuthenticationPrincipal User user
     ) {
         return activityService.saveActivity(activity, user);

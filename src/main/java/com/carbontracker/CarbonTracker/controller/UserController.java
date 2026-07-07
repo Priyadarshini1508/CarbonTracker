@@ -5,6 +5,8 @@ import com.carbontracker.CarbonTracker.dto.UpdateProfileRequest;
 import com.carbontracker.CarbonTracker.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import com.carbontracker.CarbonTracker.entity.User;
 
 @RestController
 @RequestMapping("/users")
@@ -16,14 +18,18 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/{id}")
-    public ProfileResponse getProfile(@PathVariable Long id) {
-        return userService.getProfile(id);
+    @GetMapping("/profile")
+    public ProfileResponse getProfile(
+            @AuthenticationPrincipal User user
+    ) {
+        return userService.getProfile(user);
     }
 
-    @PutMapping("/{id}")
-    public ProfileResponse updateProfile(@PathVariable Long id,
-                                         @Valid @RequestBody UpdateProfileRequest request) {
-        return userService.updateProfile(id, request);
+    @PutMapping("/profile")
+    public ProfileResponse updateProfile(
+            @AuthenticationPrincipal User user,
+            @Valid @RequestBody UpdateProfileRequest request
+    ) {
+        return userService.updateProfile(user, request);
     }
 }
